@@ -21,46 +21,51 @@
         .minibar { background-color: var(--d2l-minibar); color: white; height: 32px; font-size: 11px; display: flex; align-items: center; padding: 0 20px; }
         .navbar { background-color: var(--d2l-navbar); border-bottom: 1px solid var(--d2l-border); padding: 16px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .d2l-card { background: #ffffff; border: 1px solid var(--d2l-border); border-radius: 8px; }
-        .module-item { transition: all 0.2s ease; border-left: 4px solid transparent; }
-        .active-module { border-left: 4px solid var(--d2l-primary); background-color: #f0f7ff; color: var(--d2l-primary) !important; }
+        .module-item { transition: all 0.2s ease; border-left: 4px solid transparent; cursor: pointer; }
+        .active-module { border-left: 4px solid var(--d2l-primary); background-color: #f0f7ff !important; color: var(--d2l-primary) !important; }
         
         .launch-btn {
             background-color: var(--d2l-primary);
             color: white !important;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 6px;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 11px;
             text-decoration: none;
+            transition: opacity 0.2s;
         }
+        .launch-btn:hover { opacity: 0.9; }
 
-        .audio-player-container {
-            background: #f1f7ff;
-            border: 1px solid #c2d9ff;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        .d2l-box { border: 1px solid var(--d2l-border); border-radius: 6px; overflow: hidden; background: white; }
+        .d2l-box { border: 1px solid var(--d2l-border); border-radius: 6px; overflow: hidden; background: white; margin-bottom: 20px; }
         .d2l-box-header { background: #f9fbff; border-bottom: 1px solid var(--d2l-border); padding: 12px 16px; font-weight: 700; font-size: 13px; color: #494c4e; }
-        .netiquette-list li { margin-bottom: 8px; position: relative; padding-left: 20px; }
-        .netiquette-list li::before { content: "•"; color: var(--d2l-primary); position: absolute; left: 0; font-weight: bold; }
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .transcript-badge {
+            background: #eef2f7;
+            color: #475569;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
+    <!-- TOP STRIP -->
     <div class="minibar justify-between uppercase tracking-widest font-bold">
         <div class="flex items-center gap-4">
             <span>University of AI</span>
             <span class="opacity-30">|</span>
-            <span class="text-slate-400">Brightspace Portal</span>
+            <span class="text-slate-400">Faculty Training Portal</span>
         </div>
         <div class="flex items-center gap-4">
             <span class="text-[10px] lowercase opacity-70">cfarfan@uai.edu</span>
@@ -68,6 +73,7 @@
         </div>
     </div>
 
+    <!-- MAIN NAV -->
     <nav class="navbar">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="goHome()">
@@ -83,86 +89,231 @@
     </nav>
 
     <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- SIDEBAR -->
         <div class="lg:col-span-3">
             <div class="d2l-card overflow-hidden sticky top-8">
+                <div class="p-4 bg-slate-50 border-b font-black text-[10px] uppercase tracking-widest text-slate-500">Modules</div>
                 <div id="module-list" class="divide-y divide-slate-100 max-h-[75vh] overflow-y-auto"></div>
             </div>
         </div>
 
+        <!-- CONTENT -->
         <div class="lg:col-span-9 d2l-card min-h-[850px] shadow-sm overflow-hidden" id="main-content"></div>
     </main>
 
     <script>
+        const globalVideoLink = "https://edu.exceedlms.com/student/path/1855926";
+
         const modulesData = [
-            { id: 1, week: 'W1', title: 'Aligning Course Goals with Gemini', guide: 'Align your lesson plans with learning goals and current standards using Gemini.', hasAudio: false },
-            { id: 2, week: 'W2', title: 'From Discussion to Action: Managing Meetings', guide: 'Convert meeting notes into clear summaries and organized task lists with Gemini.', hasAudio: false },
-            { id: 3, week: 'W3', title: 'Creating Supportive Feedback Systems', guide: 'Design Gemini prompts that offer students helpful hints without giving away the answers.', hasAudio: false },
-            { id: 4, week: 'W4', title: 'Modern Research Strategies with Gemini', guide: 'Quickly find and summarize recent developments and papers in your field using Gemini.', hasAudio: false },
-            { id: 5, week: 'W5', title: 'Creating Audio Overviews with NotebookLM', guide: 'Turn long research papers into brief audio summaries for easy review.', hasAudio: true, audioSrc: "AUDIO_OVERVIEW_URL_HERE" },
-            { id: 6, week: 'W6', title: 'Building Course-Specific Study Guides', guide: 'Create a secure space for students to ask questions about class readings.', hasAudio: false },
-            { id: 7, week: 'W7', title: 'Understanding Student Progress with AI', guide: 'Review class performance to identify challenging topics using Gemini.', hasAudio: false },
-            { id: 8, week: 'W8', title: 'Visualizing Data for the Classroom', guide: 'Transform complex information into clear charts and visual aids with Gemini.', hasAudio: false },
-            { id: 9, week: 'W9', title: 'Visualizing Difficult Concepts', guide: 'Create helpful metaphors and images to explain complex theories using Gemini.', hasAudio: false },
-            { id: 10, week: 'W10', title: 'Facilitating Classroom Debates with AI', guide: 'Allow students to test arguments against Gemini providing counterpoints.', hasAudio: false },
-            { id: 11, week: 'W11', title: 'Building Rubric-Grounded Checkers', guide: 'Help students check work against rubrics before submission using Gemini.', hasAudio: false },
-            { id: 12, week: 'W12', title: 'Encouraging High-Level Classroom Discussion', guide: 'Generate thought-provoking questions to encourage deeper conversations.', hasAudio: false },
-            { id: 13, week: 'W13', title: 'Summarizing Guest Lectures and Key Takeaways', guide: 'Combine insights from guest speakers and class notes into a final reflection.', hasAudio: false }
+            { 
+                id: 1, week: 'Week 1', title: 'Aligning Course Goals with Gemini', 
+                desc: 'Match your lesson plans with learning goals and current standards.',
+                transcript: [
+                    "Introduction to Gemini's ability to ingest syllabus documents.",
+                    "Demonstration of mapping course outcomes to accreditation standards.",
+                    "Strategy for identifying gaps in current lesson coverage.",
+                    "Generating 'Bridge Activities' to link outdated content with modern AI requirements."
+                ]
+            },
+            { 
+                id: 2, week: 'Week 2', title: 'From Discussion to Action: Managing Meetings', 
+                desc: 'Convert meeting notes into clear summaries and organized task lists.',
+                transcript: [
+                    "How to record and transcribe department meetings safely.",
+                    "Prompting Gemini to identify stakeholders and owners for specific tasks.",
+                    "Creating formatted email summaries for faculty who missed the session.",
+                    "Setting up automatic reminder text for follow-up deadlines."
+                ]
+            },
+            { 
+                id: 3, week: 'Week 3', title: 'Creating Supportive Feedback Systems', 
+                desc: 'Design prompts that offer students helpful hints without giving answers.',
+                transcript: [
+                    "The philosophy of 'Supportive Guardrails' in AI feedback.",
+                    "Building a prompt that acts as a Socratic tutor.",
+                    "Techniques to prevent Gemini from simply writing the student's essay.",
+                    "Establishing a feedback loop where students explain their logic to the AI."
+                ]
+            },
+            { 
+                id: 4, week: 'Week 4', title: 'Modern Research Strategies with Gemini', 
+                desc: 'Quickly find and summarize recent developments and papers in your field.',
+                transcript: [
+                    "Using Gemini Deep Research for academic literature scans.",
+                    "Comparing research findings across multiple PDF uploads.",
+                    "Identifying contradictory viewpoints in recent journals.",
+                    "Generating a synthesis table of methodologies used in top-cited papers."
+                ]
+            },
+            { 
+                id: 5, week: 'Week 5', title: 'Creating Audio Overviews with NotebookLM', 
+                desc: 'Turn long research papers into brief audio summaries for easy review.',
+                transcript: [
+                    "Overview of NotebookLM's 'Audio Overview' feature.",
+                    "Selecting the right sources for a balanced podcast-style summary.",
+                    "Customizing the focus of the audio brief (e.g., focus on data vs. theory).",
+                    "Sharing audio files with students as pre-lecture prep materials."
+                ]
+            },
+            { 
+                id: 6, week: 'Week 6', title: 'Building Course-Specific Study Guides', 
+                desc: 'Create a secure space where students can ask questions about class readings.',
+                transcript: [
+                    "Setting up a private NotebookLM instance for a specific course unit.",
+                    "Uploading diverse source materials (notes, slides, and textbook chapters).",
+                    "Crafting the 'Lead Study Question' to guide student exploration.",
+                    "Managing student access and ensuring they use the docs as their primary source."
+                ]
+            },
+            { 
+                id: 7, week: 'Week 7', title: 'Understanding Student Progress with AI', 
+                desc: 'Review class performance to identify which topics are most challenging.',
+                transcript: [
+                    "Anonymizing student data for safe AI analysis.",
+                    "Using Gemini to spot patterns in quiz failure rates.",
+                    "Identifying common misconceptions across different class sections.",
+                    "Generating targeted 'Refresher Modules' based on detected weak spots."
+                ]
+            },
+            { 
+                id: 8, week: 'Week 8', title: 'Visualizing Data for the Classroom', 
+                desc: 'Transform complex information into clear, professional charts.',
+                transcript: [
+                    "Turning raw spreadsheets into narrative-driven charts.",
+                    "Prompting Gemini for the best visualization type for specific datasets.",
+                    "Exporting visuals for use in PowerPoint and Canvas modules.",
+                    "Ensuring data accessibility (Alt-text generation) for all visuals."
+                ]
+            },
+            { 
+                id: 9, week: 'Week 9', title: 'Visualizing Difficult Concepts', 
+                desc: 'Create helpful metaphors and images to explain abstract theories.',
+                transcript: [
+                    "Techniques for creating 'Mental Models' using AI metaphors.",
+                    "Generating descriptive prompts for image creators (e.g., Gemini Image Gen).",
+                    "Breaking down abstract concepts into sequential visual steps.",
+                    "Case study: Visualizing Quantum Entanglement vs. Economic Inflation."
+                ]
+            },
+            { 
+                id: 10, week: 'Week 10', title: 'Facilitating Classroom Debates with AI', 
+                desc: 'Allow students to test arguments against thoughtful AI counterpoints.',
+                transcript: [
+                    "Setting the 'Devil's Advocate' persona in Gemini.",
+                    "Structuring in-class live debates between students and the AI.",
+                    "Evaluating the strength of student rebuttals using AI scoring.",
+                    "Techniques for teaching students to spot AI logic errors in real-time."
+                ]
+            },
+            { 
+                id: 11, week: 'Week 11', title: 'Building Rubric-Grounded Checkers', 
+                desc: 'Help students check work against rubrics before submission.',
+                transcript: [
+                    "Translating complex PDF rubrics into interactive AI prompts.",
+                    "Teaching students to ask for 'alignment checks' rather than grades.",
+                    "Reducing grading load by ensuring higher-quality first submissions.",
+                    "Setting boundaries on how many times a student can use the checker."
+                ]
+            },
+            { 
+                id: 12, week: 'Week 12', title: 'Encouraging High-Level Classroom Discussion', 
+                desc: 'Generate thought-provoking questions to drive deeper conversations.',
+                transcript: [
+                    "Moving beyond 'Yes/No' questions with AI-generated prompts.",
+                    "Using Bloom's Taxonomy in Gemini to scale question difficulty.",
+                    "Creating 'Discussion Sparkers' based on current news and course theory.",
+                    "Strategies for managing 'Quiet Classrooms' using AI-prompted activities."
+                ]
+            },
+            { 
+                id: 13, week: 'Week 13', title: 'Summarizing Guest Lectures and Key Takeaways', 
+                desc: 'Combine insights from guest speakers and class notes into a final reflection.',
+                transcript: [
+                    "Best practices for capturing guest speaker transcripts.",
+                    "Fusing speaker insights with existing course learning objectives.",
+                    "Generating a 'Final Reflection' assignment that bridges the two.",
+                    "Creating a digital 'Course Archive' of guest speaker wisdom using AI."
+                ]
+            }
         ];
 
+        let currentActiveId = null;
+
         function goHome() {
+            currentActiveId = null;
+            renderSidebar();
             document.getElementById('main-content').innerHTML = `
-                <div class="animate-fade p-10 space-y-8">
-                    <h2 class="text-4xl font-black text-slate-900 leading-tight">Faculty AI Academy</h2>
-                    <div class="p-6 bg-slate-50 border rounded-lg border-slate-200">
-                        <p class="font-black text-slate-900">Cristobal Farfan Maguina</p>
-                        <p class="text-xs text-blue-600 font-bold uppercase mt-1">Lead AI Facilitator</p>
-                    </div>
+                <div class="animate-fade p-12 space-y-8 text-center">
+                    <h2 class="text-5xl font-black text-slate-900 leading-tight">Gemini Faculty Hub</h2>
+                    <p class="text-xl text-slate-500 max-w-2xl mx-auto">University of AI Professional Development. Watch the videos and access the transcript summaries below.</p>
+                    <a href="${globalVideoLink}" target="_blank" class="launch-btn px-12 py-4 text-sm mt-8">Open Training Path</a>
                 </div>`;
         }
 
         function selectModule(id) {
+            currentActiveId = id;
+            renderSidebar();
             const m = modulesData.find(mod => mod.id === id);
-            let audioHtml = m.hasAudio ? `
-                <div class="audio-player-container">
-                    <h5 class="text-[10px] font-black text-blue-600 uppercase mb-2">Module Audio Overview</h5>
-                    <audio controls class="w-full">
-                        <source src="${m.audioSrc}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>` : '';
+            
+            const transcriptList = m.transcript.map(item => `<li class="mb-2 pl-2 border-l-2 border-slate-200">"${item}"</li>`).join('');
 
             document.getElementById('main-content').innerHTML = `
                 <div class="animate-fade p-8 space-y-8">
-                    <h2 class="text-3xl font-black text-slate-900">${m.title}</h2>
-                    <div class="bg-[#f8fbff] p-5 border-l-4 border-[#006fbf] rounded-r-lg">
-                        <p class="text-sm text-slate-700 font-medium">${m.guide}</p>
-                        ${audioHtml}
+                    <div class="flex justify-between items-center border-b pb-6">
+                        <div>
+                            <span class="text-blue-600 font-black text-[10px] uppercase tracking-widest">${m.week}</span>
+                            <h2 class="text-3xl font-black text-slate-900">${m.title}</h2>
+                        </div>
+                        <a href="${globalVideoLink}" target="_blank" class="launch-btn">Launch Required Video</a>
                     </div>
-                    <div class="d2l-box">
-                        <div class="d2l-box-header">Practical Activity: ${m.title}</div>
-                        <div class="p-6">
-                            <p class="text-sm text-slate-700 mb-4">Complete the activity as described in the module video.</p>
-                            <div class="border-2 border-dashed border-slate-200 rounded-lg p-6 text-center text-xs font-bold text-slate-400">UPLOAD FOLDER</div>
+
+                    <div class="bg-slate-900 rounded-xl p-16 text-center text-white border border-slate-700 shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
+                        <div class="relative z-10">
+                            <div class="mb-4 opacity-50"><svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg></div>
+                            <h3 class="text-lg font-bold mb-4">Training Video: ${m.title}</h3>
+                            <a href="${globalVideoLink}" target="_blank" class="inline-block border border-white px-6 py-2 rounded text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Watch on Exceed LMS</a>
                         </div>
                     </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="d2l-box">
+                            <div class="d2l-box-header">Video Transcript Summary</div>
+                            <div class="p-6">
+                                <span class="transcript-badge">Highlights from Training</span>
+                                <ul class="text-[11px] text-slate-600 leading-relaxed list-none">
+                                    ${transcriptList}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="d2l-box">
+                            <div class="d2l-box-header">Required Activity: ${m.week}</div>
+                            <div class="p-6">
+                                <p class="text-xs text-slate-700 mb-6 font-medium">${m.desc}</p>
+                                <div class="border-2 border-dashed border-slate-200 rounded-lg p-10 text-center text-[10px] font-black text-slate-300">
+                                    DRAG & DROP SUBMISSION
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d2l-box">
-                        <div class="d2l-box-header">Discussion Forum (250 Words)</div>
-                        <div class="p-6 text-xs text-slate-600">
-                            <p class="mb-4 italic">Reflect on how this tool impacts your specific teaching discipline.</p>
-                            <ul class="netiquette-list">
-                                <li>Be professional and respectful.</li>
-                                <li>Cite specific examples from your course.</li>
-                            </ul>
-                            <button class="mt-4 w-full bg-[#006fbf] text-white py-2 rounded font-black uppercase">Post New Thread</button>
+                        <div class="d2l-box-header">250-Word Discussion Reflection</div>
+                        <div class="p-6 flex justify-between items-center">
+                            <p class="text-xs text-slate-500 italic max-w-md">How does this week's strategy specifically improve student outcomes in your discipline?</p>
+                            <button class="bg-[#006fbf] text-white px-6 py-3 rounded font-black uppercase text-[10px] tracking-widest shadow-lg">Post Thread</button>
                         </div>
                     </div>
                 </div>`;
         }
 
-        document.getElementById('module-list').innerHTML = modulesData.map(m => `
-            <div onclick="selectModule(${m.id})" class="module-item p-4 cursor-pointer hover:bg-slate-50 text-[11px] font-bold uppercase">
-                ${m.week}: ${m.title}
-            </div>`).join('');
+        function renderSidebar() {
+            document.getElementById('module-list').innerHTML = modulesData.map(m => `
+                <div onclick="selectModule(${m.id})" class="module-item p-4 text-[10.5px] font-bold uppercase tracking-tight ${currentActiveId === m.id ? 'active-module' : ''}">
+                    <span class="opacity-40 mr-1">${m.week}:</span> ${m.title}
+                </div>`).join('');
+        }
         
         goHome();
     </script>
