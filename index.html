@@ -46,10 +46,10 @@
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        .direct-link-btn {
-            background-color: #d32f2f;
+        .external-link-btn {
+            background-color: #1a73e8;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 6px;
             font-weight: 800;
             display: inline-flex;
@@ -60,13 +60,47 @@
             font-size: 11px;
         }
 
-        .direct-link-btn:hover {
-            background-color: #b71c1c;
+        .external-link-btn:hover {
+            background-color: #1557b0;
             transform: translateY(-1px);
         }
 
-        .syllabus-accent {
-            border-left: 4px solid var(--d2l-primary);
+        .gemini-btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .academy-banner {
+            background: linear-gradient(90deg, #1a73e8 0%, #4285f4 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .error-box {
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .animate-fade {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -88,102 +122,123 @@
     <!-- Main Navigation Bar -->
     <nav class="bg-white border-b border-slate-200 px-6 py-4 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-black text-[#006fbf] tracking-tight">GEMINI FACULTY HUB</h1>
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl font-black text-[#006fbf] tracking-tight uppercase">Faculty Hub</h1>
+                <div class="flex gap-2">
+                    <a href="https://gemini.google.com" target="_blank" class="gemini-btn">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Gemini AI
+                    </a>
+                </div>
+            </div>
             <div class="hidden md:flex gap-6 text-xs font-bold text-slate-500 uppercase">
-                <span class="text-[#006fbf] border-b-2 border-[#006fbf] pb-1">Course Home</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Content</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Assignments</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Classlist</span>
+                <span class="text-[#006fbf] border-b-2 border-[#006fbf] pb-1 cursor-pointer" onclick="location.reload()">Course Home</span>
+                <span class="hover:text-[#006fbf] cursor-pointer">Modules</span>
+                <span class="hover:text-[#006fbf] cursor-pointer">Support</span>
             </div>
         </div>
     </nav>
 
     <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Sidebar: Table of Contents -->
+        <!-- Sidebar -->
         <div class="lg:col-span-4 space-y-4">
             <div class="d2l-card p-5">
-                <h3 class="text-xs font-black text-slate-400 border-b pb-3 mb-4 uppercase tracking-widest">Table of Contents</h3>
+                <h3 class="text-xs font-black text-slate-400 border-b pb-3 mb-4 uppercase tracking-widest">13-Week Schedule</h3>
                 <div id="module-list" class="space-y-1">
                     <!-- Modules injected by JS -->
                 </div>
             </div>
 
-            <!-- Instructor Info Sidebar -->
-            <div class="d2l-card p-5 bg-slate-50 border-dashed">
-                <h4 class="text-[10px] font-black text-slate-400 uppercase mb-3">Quick Contact</h4>
-                <p class="text-sm font-bold text-slate-800">Cristobal Farfan M.S</p>
-                <p class="text-xs text-[#006fbf] underline mb-3">cfarfan@udallas.edu</p>
-                <p class="text-[10px] text-slate-500 leading-relaxed">Office Hours: Virtual / By appointment via Microsoft Teams.</p>
+            <div class="academy-banner shadow-lg">
+                <h4 class="text-xs font-black uppercase tracking-widest mb-2 opacity-80">Official Course</h4>
+                <p class="text-sm font-bold mb-4">Gemini Academy for Educators</p>
+                <a href="https://edu.google.com/for-educators/ai-training/" target="_blank" class="block text-center bg-white text-[#1a73e8] py-2 px-4 rounded font-black text-[10px] uppercase hover:bg-slate-100 transition-all">
+                    Access Training Site
+                </a>
+            </div>
+
+            <!-- Troubleshooting Sidebar -->
+            <div class="d2l-card p-5 bg-red-50 border-red-100">
+                <h4 class="text-[10px] font-black text-red-800 uppercase mb-3 flex items-center gap-2">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"></path></svg>
+                    Fix Error 153
+                </h4>
+                <p class="text-[11px] text-red-700 leading-relaxed mb-2">If you see "Signature Does Not Match", your session has timed out.</p>
+                <button onclick="window.open('https://edu.exceedlms.com/student/catalog', '_blank')" class="text-[10px] font-bold text-red-900 underline uppercase">Refresh Session Now</button>
             </div>
         </div>
 
-        <!-- Main Content Area: Course Homepage/Details -->
+        <!-- Main Content Area -->
         <div class="lg:col-span-8 d2l-card min-h-[800px] flex flex-col" id="module-detail">
-            <!-- Initial "Course Home" View -->
             <div class="p-10 space-y-10">
                 <div class="text-center space-y-4">
                     <h2 class="text-3xl font-black text-slate-900 leading-tight uppercase">
-                        AI101: Artificial Intelligence and Digital Skills for Educators
+                        AI101: Faculty Professional Development
                     </h2>
-                    <p class="text-[#006fbf] font-bold tracking-widest uppercase text-sm">Spring 2028 | Faculty Professional Development</p>
+                    <p class="text-[#006fbf] font-bold tracking-widest uppercase text-sm">Spring 2028 | Cristobal Farfan M.S</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-center gap-6">
+                    <div class="bg-blue-600 p-4 rounded-full text-white">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-slate-900 uppercase text-xs tracking-widest">Faculty Onboarding</h3>
+                        <p class="text-sm text-slate-600 mt-1 leading-relaxed">
+                            Welcome to the University of Dallas AI Hub. Please select a module on the left to access video training, discussion prompts, and weekly practical activities.
+                        </p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
-                        <h3 class="text-sm font-black text-slate-800 uppercase border-b pb-2">Course Overview</h3>
+                        <h3 class="text-sm font-black text-slate-800 uppercase border-b pb-2">Overview</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">
-                            Welcome to the Gemini Faculty Fundamentals hub. This 13-week learning path is designed to transition instructional faculty from AI curiosity to classroom mastery. 
-                        </p>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            Each module includes a focused video training provided by Google, a discussion prompt for reflection, and a practical activity to implement in your own curriculum.
+                            This hub centralizes the 13-week curriculum for mastering Gemini and NotebookLM in high-stakes instructional settings.
                         </p>
                     </div>
                     <div class="space-y-4">
-                        <h3 class="text-sm font-black text-slate-800 uppercase border-b pb-2">Getting Started</h3>
-                        <ul class="text-sm text-slate-600 space-y-2">
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#006fbf] font-bold">1.</span> Select a week from the Table of Contents.
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#006fbf] font-bold">2.</span> Watch the integrated training video.
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#006fbf] font-bold">3.</span> Access direct YouTube links if viewing issues occur.
-                            </li>
-                        </ul>
+                        <h3 class="text-sm font-black text-slate-800 uppercase border-b pb-2">Resources</h3>
+                        <div class="flex flex-col gap-2">
+                            <a href="https://edu.google.com/for-educators/ai-training/" target="_blank" class="text-xs font-bold text-[#006fbf] hover:underline flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Google AI Academy (Main Page)
+                            </a>
+                            <a href="https://gemini.google.com" target="_blank" class="text-xs font-bold text-[#006fbf] hover:underline flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Launch Gemini Workspace
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="border-t border-slate-100 pt-10 flex flex-col items-center text-slate-400">
                     <svg class="w-12 h-12 mb-4 opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                    <p class="text-xs font-bold uppercase tracking-tighter">Please select a module to view weekly content</p>
+                    <p class="text-xs font-bold uppercase tracking-tighter">Choose a week from the menu to start</p>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-8 mt-12">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2028 Cristobal Farfan | University of Dallas | Final Project AI101</p>
-        </div>
-    </footer>
-
     <script>
+        // Updated path to use the clean educator training landing page
+        const academyPath = "https://edu.google.com/for-educators/ai-training/";
+        
         const modulesData = [
-            { id: 1, week: 1, title: 'AI Foundations & Literacy', videoId: 'XshF3a4sJk0', discussion: 'How does your understanding of LLMs differ from a search engine?', activity: 'Submit AI Literacy Self-Assessment.' },
-            { id: 2, week: 2, title: 'Meeting to Action Mastery', videoId: '0-j-A61p104', discussion: 'Identify a meeting that would benefit from AI transcription.', activity: 'Upload an Action Table from a mock transcript.' },
-            { id: 3, week: 3, title: 'Instructional Guardrails', videoId: 'k-D5Tf-a2eI', discussion: 'What are the ethical risks of AI feedback without oversight?', activity: 'Design a "Feedback Loop" prompt.' },
-            { id: 4, week: 4, title: 'AI-Driven Research Scans', videoId: 'mZunh6q92o4', discussion: 'Compare Gemini Deep Research with library databases.', activity: 'Upload a 1-page pedagogical trends summary.' },
-            { id: 5, week: 5, title: 'NotebookLM Audio Briefs', videoId: 'E_PAnzJclb0', discussion: 'When is an audio summary more effective than a written brief?', activity: 'Submit a NotebookLM Audio link/screenshot.' },
-            { id: 6, week: 6, title: 'The Socratic AI Tutor', videoId: 'fXvX0k-q8kM', discussion: 'How can AI encourage "productive struggle"?', activity: 'Upload custom Socratic Tutor instructions.' },
-            { id: 7, week: 7, title: 'Data Analysis for Engagement', videoId: 'R_70O6G4ZkI', discussion: 'Which engagement metrics are hardest to track?', activity: 'Submit a data visualization report.' },
-            { id: 8, week: 8, title: 'Advanced Data Viz', videoId: 'V8lHPrR4Vmk', discussion: 'Discuss "Data Storytelling" in departmental work.', activity: 'Upload a performance trend infographic.' },
-            { id: 9, week: 9, title: 'Metaphorical Visualization', videoId: '6P6M0k6eX2E', discussion: 'How do visual metaphors help bridge abstract concepts?', activity: 'Create an AI visual aid for a complex theory.' },
-            { id: 10, week: 10, title: 'Ethical Seminar Sparks', videoId: 'vV7k-L8p4Ww', discussion: 'Draft a debate prompt regarding AI ethics.', activity: 'Upload 5 "Seminar Spark" prompts.' },
-            { id: 11, week: 11, title: 'Automated Rubric Checks', videoId: 'Yp9N6zRzE4o', discussion: 'Should students see AI rubric checks before submission?', activity: 'Submit a custom AI assessment rubric.' },
-            { id: 12, week: 12, title: 'Local Case Study Design', videoId: 'o0L6jP4v2O0', discussion: 'How does localization improve student buy-in?', activity: 'Upload a localized case study.' },
-            { id: 13, week: 13, title: 'Final Synthesis & Debrief', videoId: 'v_F8M8k9n7I', discussion: 'What is the biggest shift in your teaching philosophy?', activity: 'Submit Final AI Implementation Plan.' }
+            { id: 1, week: 1, title: 'The Curriculum Mapper', videoId: 'XshF3a4sJk0', discussion: 'How does your understanding of LLMs differ from a search engine?', activity: 'Map your current syllabus against new industry standards.' },
+            { id: 2, week: 2, title: 'Meeting to Action Summary', videoId: '0-j-A61p104', discussion: 'Identify a meeting that would benefit from AI transcription.', activity: 'Extract a checklist of action items from a mock transcript.' },
+            { id: 3, week: 3, title: 'Guided Feedback Guardrails', videoId: 'k-D5Tf-a2eI', discussion: 'What are the ethical risks of AI feedback without oversight?', activity: 'Create a prompt that provides feedback without giving answers.' },
+            { id: 4, week: 4, title: 'Gemini Deep Research', videoId: 'mZunh6q92o4', discussion: 'Compare Gemini Deep Research with library databases.', activity: 'Find 5 cited papers in your field from the last 12 months.' },
+            { id: 5, week: 5, title: 'Research Brief (NotebookLM)', videoId: 'E_PAnzJclb0', discussion: 'When is an audio summary more effective than a written brief?', activity: 'Generate a "Deep Dive" audio summary from your research PDFs.' },
+            { id: 6, week: 6, title: 'The Socratic Tutor', videoId: 'fXvX0k-q8kM', discussion: 'How can AI encourage "productive struggle"?', activity: 'Create a study guide notebook for your hardest unit.' },
+            { id: 7, week: 7, title: 'Live Data Analyst', videoId: 'R_70O6G4ZkI', discussion: 'Which engagement metrics are hardest to track?', activity: 'Identify trends in anonymized student performance data.' },
+            { id: 8, week: 8, title: 'Data Viz Infographics', videoId: 'V8lHPrR4Vmk', discussion: 'Discuss "Data Storytelling" in departmental work.', activity: 'Suggest a layout for a complex research infographic.' },
+            { id: 9, week: 9, title: 'Visualizing Abstract Concepts', videoId: '6P6M0k6eX2E', discussion: 'How do visual metaphors help bridge abstract concepts?', activity: 'Use Gemini to create a visual metaphor for a theory.' },
+            { id: 10, week: 10, title: 'Socratic Sparring Partner', videoId: 'vV7k-L8p4Ww', discussion: 'Draft a debate prompt regarding AI ethics.', activity: 'Have students debate Gemini taking a "Devil\'s Advocate" stance.' },
+            { id: 11, week: 11, title: 'Pre-Submission Reviewer', videoId: 'Yp9N6zRzE4o', discussion: 'Should students see AI rubric checks before submission?', activity: 'Design a prompt for students to check papers against rubrics.' },
+            { id: 12, week: 12, title: 'The Seminar Spark', videoId: 'o0L6jP4v2O0', discussion: 'How does localization improve student buy-in?', activity: 'Generate 5 "High-Order Thinking" questions for a seminar.' },
+            { id: 13, week: 13, title: 'Guest Speaker Debrief', videoId: 'v_F8M8k9n7I', discussion: 'What is the biggest shift in your teaching philosophy?', activity: 'Synthesize guest lecture notes into a reflection assignment.' }
         ];
 
         function renderModules() {
@@ -191,40 +246,36 @@
             list.innerHTML = modulesData.map(m => `
                 <div onclick="selectModule(${m.id})" class="module-item p-3 rounded cursor-pointer hover:bg-slate-50 transition-all border-l-4 border-transparent flex items-center gap-3">
                     <div class="w-6 h-6 bg-slate-100 rounded text-[10px] flex items-center justify-center font-black text-slate-400">${m.week}</div>
-                    <span class="text-xs font-bold text-slate-600">${m.title}</span>
+                    <span class="text-[11px] font-bold text-slate-600">${m.title}</span>
                 </div>
             `).join('');
         }
 
         function selectModule(id) {
-            // Update UI selection
             document.querySelectorAll('.module-item').forEach((el, idx) => {
                 el.classList.toggle('active-module', idx + 1 === id);
             });
 
             const m = modulesData.find(mod => mod.id === id);
             const container = document.getElementById('module-detail');
-            const directUrl = `https://www.youtube.com/watch?v=${m.videoId}`;
             const embedUrl = `https://www.youtube.com/embed/${m.videoId}`;
 
             container.innerHTML = `
                 <div class="animate-fade flex flex-col h-full">
-                    <!-- Header -->
                     <div class="p-8 border-b border-slate-100 bg-[#fcfdfe] flex justify-between items-center">
                         <div>
                             <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Week ${m.week}: ${m.title}</h2>
-                            <p class="text-[#006fbf] font-bold text-xs uppercase tracking-widest mt-1">Module Content & Video Resource</p>
+                            <p class="text-[#006fbf] font-bold text-[10px] uppercase tracking-widest mt-1">Cristobal Farfan AI101 Faculty Hub</p>
                         </div>
-                        <a href="${directUrl}" target="_blank" class="direct-link-btn">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                            Open in YouTube
+                        <a href="${academyPath}" target="_blank" class="external-link-btn">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Training Portal
                         </a>
                     </div>
 
-                    <!-- Content -->
                     <div class="p-8 space-y-10 overflow-y-auto">
                         <div class="space-y-4">
-                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">1. Video Presentation</h3>
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">1. Watch Training</h3>
                             <div class="video-container shadow-xl border-4 border-white ring-1 ring-slate-200">
                                 <iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe>
                             </div>
@@ -232,25 +283,24 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-slate-50">
                             <div class="space-y-3">
-                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">2. Discussion Prompt</h3>
-                                <div class="syllabus-accent p-4 bg-blue-50 text-sm font-bold text-slate-700 italic">
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">2. Discussion</h3>
+                                <div class="p-4 bg-blue-50 border-l-4 border-blue-500 text-sm font-bold text-slate-700 italic">
                                     "${m.discussion}"
                                 </div>
                             </div>
                             <div class="space-y-3">
-                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">3. Weekly Activity</h3>
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">3. Week ${m.week} Activity</h3>
                                 <div class="p-4 bg-slate-50 border border-slate-200 rounded text-sm text-slate-600 font-medium">
                                     ${m.activity}
+                                    <div class="mt-4 pt-4 border-t border-slate-200">
+                                        <a href="https://gemini.google.com" target="_blank" class="text-[#006fbf] font-bold text-[10px] uppercase hover:underline flex items-center gap-1">
+                                            Open Gemini Workspace 
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Footer Action -->
-                    <div class="p-6 bg-slate-50 border-t border-slate-200 flex justify-end">
-                        <button class="px-6 py-2.5 bg-[#006fbf] text-white font-bold text-xs rounded uppercase tracking-widest hover:bg-[#005fa3] transition-colors">
-                            Submit Completion
-                        </button>
                     </div>
                 </div>
             `;
