@@ -17,16 +17,9 @@
             --d2l-minibar: #202122;
         }
 
-        body { 
-            font-family: 'Lato', sans-serif; 
-            background-color: var(--d2l-bg); 
-            color: var(--d2l-text); 
-            margin: 0;
-        }
-        
+        body { font-family: 'Lato', sans-serif; background-color: var(--d2l-bg); color: var(--d2l-text); margin: 0; }
         .minibar { background-color: var(--d2l-minibar); color: white; height: 32px; font-size: 11px; display: flex; align-items: center; padding: 0 20px; }
         .navbar { background-color: var(--d2l-navbar); border-bottom: 1px solid var(--d2l-border); padding: 16px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-
         .d2l-card { background: #ffffff; border: 1px solid var(--d2l-border); border-radius: 8px; }
         .module-item { transition: all 0.2s ease; border-left: 4px solid transparent; }
         .active-module { border-left: 4px solid var(--d2l-primary); background-color: #f0f7ff; color: var(--d2l-primary) !important; }
@@ -45,29 +38,27 @@
             text-decoration: none;
         }
 
+        .audio-player-container {
+            background: #f1f7ff;
+            border: 1px solid #c2d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
         .d2l-box { border: 1px solid var(--d2l-border); border-radius: 6px; overflow: hidden; background: white; }
         .d2l-box-header { background: #f9fbff; border-bottom: 1px solid var(--d2l-border); padding: 12px 16px; font-weight: 700; font-size: 13px; color: #494c4e; }
-        
-        .status-pill { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; }
-        .status-open { background: #e3f2fd; color: #0072ce; }
-
         .netiquette-list li { margin-bottom: 8px; position: relative; padding-left: 20px; }
         .netiquette-list li::before { content: "•"; color: var(--d2l-primary); position: absolute; left: 0; font-weight: bold; }
-
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        #module-list::-webkit-scrollbar { width: 4px; }
-        #module-list::-webkit-scrollbar-track { background: #f1f1f1; }
-        #module-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- MINIBAR -->
     <div class="minibar justify-between uppercase tracking-widest font-bold">
         <div class="flex items-center gap-4">
-            <span class="hover:text-blue-400 cursor-pointer">University of AI</span>
+            <span>University of AI</span>
             <span class="opacity-30">|</span>
             <span class="text-slate-400">Brightspace Portal</span>
         </div>
@@ -77,7 +68,6 @@
         </div>
     </div>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="goHome()">
@@ -88,178 +78,93 @@
                 <span onclick="goHome()" class="text-[#006fbf] border-b-2 border-[#006fbf] pb-1 cursor-pointer">Course Home</span>
                 <span class="hover:text-[#006fbf] cursor-pointer">Content</span>
                 <span class="hover:text-[#006fbf] cursor-pointer">Discussions</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Assignments</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Grades</span>
             </div>
         </div>
     </nav>
 
     <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        <!-- SIDEBAR -->
         <div class="lg:col-span-3">
             <div class="d2l-card overflow-hidden sticky top-8">
-                <div class="bg-slate-50 p-4 border-b border-slate-200">
-                    <h3 class="text-[11px] font-black text-slate-500 uppercase tracking-widest">Table of Contents</h3>
-                </div>
-                <div id="module-list" class="divide-y divide-slate-100 max-h-[75vh] overflow-y-auto">
-                    <!-- JS Injected 13 Weeks -->
-                </div>
+                <div id="module-list" class="divide-y divide-slate-100 max-h-[75vh] overflow-y-auto"></div>
             </div>
         </div>
 
-        <!-- MAIN CONTENT AREA -->
-        <div class="lg:col-span-9 d2l-card min-h-[850px] shadow-sm overflow-hidden" id="main-content">
-            <!-- Content changes based on JS selection -->
-        </div>
+        <div class="lg:col-span-9 d2l-card min-h-[850px] shadow-sm overflow-hidden" id="main-content"></div>
     </main>
 
     <script>
-        const exceedPath = "https://edu.exceedlms.com/student/path/1855926";
-        
         const modulesData = [
-            { id: 1, week: 'W1', title: 'Curriculum Mapper', guide: 'Strategic alignment tool that uses Gemini to cross-reference syllabus objectives with accreditation standards.', activity: 'Upload your syllabus and prompt Gemini to identify 3 areas where AI integration can enhance existing learning outcomes.', discussion: 'How does AI-driven curriculum mapping change the speed and depth of departmental course reviews?' },
-            { id: 2, week: 'W2', title: 'Meeting to Action', guide: 'Natural Language Processing (NLP) technique to transform messy meeting transcripts into structured project management lists.', activity: 'Record or provide a transcript of a 10-minute brainstorming session; generate a table of action items with owners and deadlines.', discussion: 'Discuss the ethical implications of using AI to summarize faculty discourse. What might be lost in translation?' },
-            { id: 3, week: 'W3', title: 'Guided Feedback', guide: 'Prompt engineering strategy that restricts AI from giving answers, forcing it instead to provide scaffolding and hints.', activity: 'Build a "Socratic Feedback Bot" prompt for a specific assignment in your course.', discussion: 'Analyze the difference between "Corrective Feedback" and "Generative Scaffolding" in an AI-infused classroom.' },
-            { id: 4, week: 'W4', title: 'Deep Research', guide: 'Advanced search protocol using Gemini Deep Research to synthesize vast amounts of peer-reviewed data into literature briefs.', activity: 'Find and summarize the 5 most influential papers in your niche published in the last 18 months.', discussion: 'Is "AI-Augmented Research" a new methodology, or simply a faster search engine? Defend your position.' },
-            { id: 5, week: 'W5', title: 'NotebookLM Basics', guide: 'A localized "grounded" AI environment where responses are limited strictly to the sources you upload.', activity: 'Upload a cluster of PDFs related to one module of your course and generate a 5-minute audio overview.', discussion: 'Explain how NotebookLM mitigates the risk of hallucinations compared to generalized chatbots like ChatGPT.' },
-            { id: 6, week: 'W6', title: 'The Socratic Tutor', guide: 'Leveraging NotebookLM’s "Source-Grounded" Q&A to create a virtual tutor that knows your specific course materials.', activity: 'Design a student-facing "Study Guide" notebook using your own lecture notes and readings.', discussion: 'How can virtual Socratic tutors help address the "Bloom\'s Two-Sigma Problem" in higher education?' },
-            { id: 7, week: 'W7', title: 'Live Data Analyst', guide: 'Statistical analysis mode that visualizes trends in anonymized student performance data to identify learning gaps.', activity: 'Input a set of mock test scores and ask Gemini to identify the "concept threshold" most students failed to cross.', discussion: 'What are the privacy boundaries faculty must set when uploading student data to cloud-based AI models?' },
-            { id: 8, week: 'W8', title: 'Data Visualization', guide: 'The transition of raw data into high-fidelity infographics and visual charts for classroom presentations.', activity: 'Take a complex dataset from your research and generate a prompt for a comprehensive infographic layout.', discussion: 'Discuss the importance of "Data Storytelling" in making academic research accessible to undergraduate students.' },
-            { id: 9, week: 'W9', title: 'Visual Metaphors', guide: 'Generative image techniques used to represent abstract theoretical concepts that lack physical form.', activity: 'Use Gemini to generate a visual metaphor for a difficult theory in your field (e.g., Entropy, Inflation, or The Subconscious).', discussion: 'How can visual metaphors generated by AI help neurodivergent students grasp abstract concepts more effectively?' },
-            { id: 10, week: 'W10', title: 'Socratic Sparring', guide: 'Debate-based learning where AI is prompted to take a "Devil\'s Advocate" position to test student logic.', activity: 'In-class simulation: Prompt Gemini to argue against a central thesis of your course and record the student counter-arguments.', discussion: 'Evaluate the role of AI in fostering critical thinking through adversarial debate.' },
-            { id: 11, week: 'W11', title: 'Pre-Submission Review', guide: 'Automated rubric checking that allows students to receive formative feedback before a final grade is recorded.', activity: 'Create a prompt that allows students to upload their drafts and receive a "Self-Check" against your specific rubric.', discussion: 'Does pre-submission AI feedback lead to "grade inflation" or "mastery learning"? Explain your reasoning.' },
-            { id: 12, week: 'W12', title: 'The Seminar Spark', guide: 'Generative ideation to create high-order thinking questions that drive synchronous classroom engagement.', activity: 'Generate 5 discussion-starting questions based on a current events article related to your subject matter.', discussion: 'Share which generated question sparked the most intense classroom debate and why.' },
-            { id: 13, week: 'W13', title: 'Guest Speaker Debrief', guide: 'Synthesis of external insights into the permanent course record through automated debriefing tasks.', activity: 'Create a reflection template that links a guest speaker’s talk to the core learning outcomes of the semester.', discussion: 'As we conclude, reflect on your 13-week journey. How has your "AI Identity" as an educator evolved?' }
+            { id: 1, week: 'W1', title: 'Aligning Course Goals with Gemini', guide: 'Align your lesson plans with learning goals and current standards using Gemini.', hasAudio: false },
+            { id: 2, week: 'W2', title: 'From Discussion to Action: Managing Meetings', guide: 'Convert meeting notes into clear summaries and organized task lists with Gemini.', hasAudio: false },
+            { id: 3, week: 'W3', title: 'Creating Supportive Feedback Systems', guide: 'Design Gemini prompts that offer students helpful hints without giving away the answers.', hasAudio: false },
+            { id: 4, week: 'W4', title: 'Modern Research Strategies with Gemini', guide: 'Quickly find and summarize recent developments and papers in your field using Gemini.', hasAudio: false },
+            { id: 5, week: 'W5', title: 'Creating Audio Overviews with NotebookLM', guide: 'Turn long research papers into brief audio summaries for easy review.', hasAudio: true, audioSrc: "AUDIO_OVERVIEW_URL_HERE" },
+            { id: 6, week: 'W6', title: 'Building Course-Specific Study Guides', guide: 'Create a secure space for students to ask questions about class readings.', hasAudio: false },
+            { id: 7, week: 'W7', title: 'Understanding Student Progress with AI', guide: 'Review class performance to identify challenging topics using Gemini.', hasAudio: false },
+            { id: 8, week: 'W8', title: 'Visualizing Data for the Classroom', guide: 'Transform complex information into clear charts and visual aids with Gemini.', hasAudio: false },
+            { id: 9, week: 'W9', title: 'Visualizing Difficult Concepts', guide: 'Create helpful metaphors and images to explain complex theories using Gemini.', hasAudio: false },
+            { id: 10, week: 'W10', title: 'Facilitating Classroom Debates with AI', guide: 'Allow students to test arguments against Gemini providing counterpoints.', hasAudio: false },
+            { id: 11, week: 'W11', title: 'Building Rubric-Grounded Checkers', guide: 'Help students check work against rubrics before submission using Gemini.', hasAudio: false },
+            { id: 12, week: 'W12', title: 'Encouraging High-Level Classroom Discussion', guide: 'Generate thought-provoking questions to encourage deeper conversations.', hasAudio: false },
+            { id: 13, week: 'W13', title: 'Summarizing Guest Lectures and Key Takeaways', guide: 'Combine insights from guest speakers and class notes into a final reflection.', hasAudio: false }
         ];
 
         function goHome() {
-            const container = document.getElementById('main-content');
-            document.querySelectorAll('.module-item').forEach(el => el.classList.remove('active-module'));
-            
-            container.innerHTML = `
-                <div class="animate-fade p-10 space-y-12">
-                    <div class="border-b border-slate-100 pb-8">
-                        <h2 class="text-4xl font-black text-slate-900 leading-tight">Faculty AI Academy</h2>
-                        <p class="text-[#006fbf] font-bold tracking-[0.2em] uppercase text-sm mt-2">Professional Learning Portal</p>
+            document.getElementById('main-content').innerHTML = `
+                <div class="animate-fade p-10 space-y-8">
+                    <h2 class="text-4xl font-black text-slate-900 leading-tight">Faculty AI Academy</h2>
+                    <div class="p-6 bg-slate-50 border rounded-lg border-slate-200">
+                        <p class="font-black text-slate-900">Cristobal Farfan Maguina</p>
+                        <p class="text-xs text-blue-600 font-bold uppercase mt-1">Lead AI Facilitator</p>
                     </div>
-
-                    <div class="grid md:grid-cols-2 gap-10">
-                        <div class="space-y-6">
-                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Instructor Profile</h3>
-                            <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-lg border border-slate-200">
-                                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-black text-xl shadow-inner">CF</div>
-                                <div>
-                                    <p class="font-black text-slate-900">Cristobal Farfan Maguina</p>
-                                    <p class="text-[10px] text-blue-600 font-bold uppercase mt-1">Lead AI Facilitator</p>
-                                </div>
-                            </div>
-                            <div class="p-5 border border-slate-100 rounded-lg bg-white italic text-slate-600 text-sm leading-relaxed">
-                                "Welcome to the 13-Week Gemini Faculty Fundamentals. This environment mimics our formal LMS to provide a seamless transition between learning AI and implementing it in your classroom."
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Course Materials</h3>
-                            <div class="bg-white border border-slate-200 p-6 rounded-lg shadow-sm space-y-4">
-                                <p class="text-xs text-slate-500 leading-tight">Access all official video fundamentals and interactive paths via the Gemini Faculty Portal:</p>
-                                <a href="${exceedPath}" target="_blank" class="launch-btn w-full justify-center">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
-                                    Launch Training Path
-                                </a>
-                                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-[9px] font-black uppercase text-slate-400">
-                                    <span>Credits: 3.0 PD</span>
-                                    <span>Status: Active</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderModules() {
-            const list = document.getElementById('module-list');
-            list.innerHTML = modulesData.map(m => `
-                <div onclick="selectModule(${m.id})" class="module-item p-4 cursor-pointer hover:bg-slate-50 flex items-center gap-4 text-slate-600">
-                    <div class="w-6 text-[10px] font-black opacity-40">${m.week}</div>
-                    <span class="text-[11px] font-bold uppercase tracking-tight">${m.title}</span>
-                </div>
-            `).join('');
-            goHome();
+                </div>`;
         }
 
         function selectModule(id) {
-            document.querySelectorAll('.module-item').forEach((el, idx) => el.classList.toggle('active-module', idx + 1 === id));
             const m = modulesData.find(mod => mod.id === id);
-            const container = document.getElementById('main-content');
-            
-            container.innerHTML = `
+            let audioHtml = m.hasAudio ? `
+                <div class="audio-player-container">
+                    <h5 class="text-[10px] font-black text-blue-600 uppercase mb-2">Module Audio Overview</h5>
+                    <audio controls class="w-full">
+                        <source src="${m.audioSrc}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>` : '';
+
+            document.getElementById('main-content').innerHTML = `
                 <div class="animate-fade p-8 space-y-8">
-                    <div class="flex justify-between items-start border-b border-slate-100 pb-6">
-                        <div>
-                            <p class="text-[#006fbf] font-bold text-[10px] uppercase tracking-[0.3em] mb-1">Module ${id} : ${m.week}</p>
-                            <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">${m.title}</h2>
-                        </div>
-                        <a href="${exceedPath}" target="_blank" class="launch-btn">Launch Tutorial</a>
-                    </div>
-
+                    <h2 class="text-3xl font-black text-slate-900">${m.title}</h2>
                     <div class="bg-[#f8fbff] p-5 border-l-4 border-[#006fbf] rounded-r-lg">
-                        <h4 class="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">Pedagogical Definition</h4>
                         <p class="text-sm text-slate-700 font-medium">${m.guide}</p>
+                        ${audioHtml}
                     </div>
-
-                    <div class="d2l-box shadow-sm">
-                        <div class="d2l-box-header flex justify-between items-center">
-                            <span>Practical Activity Folder</span>
-                            <span class="status-pill status-open">Open for Submission</span>
-                        </div>
+                    <div class="d2l-box">
+                        <div class="d2l-box-header">Practical Activity: ${m.title}</div>
                         <div class="p-6">
-                            <h5 class="text-xs font-black text-slate-400 uppercase mb-3">Activity Instructions</h5>
-                            <p class="text-sm text-slate-700 mb-6 leading-relaxed">${m.activity}</p>
-                            
-                            <div class="border-2 border-dashed border-slate-200 rounded-lg p-8 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition-colors cursor-pointer">
-                                <svg class="w-8 h-8 text-slate-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Drop file here or click to upload</p>
-                            </div>
+                            <p class="text-sm text-slate-700 mb-4">Complete the activity as described in the module video.</p>
+                            <div class="border-2 border-dashed border-slate-200 rounded-lg p-6 text-center text-xs font-bold text-slate-400">UPLOAD FOLDER</div>
                         </div>
                     </div>
-
-                    <div class="d2l-box shadow-sm">
-                        <div class="d2l-box-header flex items-center gap-2">
-                            <svg class="w-4 h-4 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg>
-                            <span>Module Discussion: Faculty Reflection</span>
-                        </div>
-                        <div class="p-6 space-y-6">
-                            <div class="bg-slate-50 p-5 rounded border border-slate-100 italic text-sm text-slate-700 leading-relaxed">
-                                "${m.discussion}"
-                            </div>
-
-                            <div class="grid md:grid-cols-2 gap-6 pt-4">
-                                <div class="space-y-2">
-                                    <h6 class="text-[10px] font-black text-blue-600 uppercase tracking-widest">Submission Guidelines</h6>
-                                    <p class="text-xs text-slate-500">Initial posts must be <span class="font-black text-slate-800">250 words minimum</span>. Please cite at least one specific example from your disciplinary context.</p>
-                                </div>
-                                <div class="space-y-2">
-                                    <h6 class="text-[10px] font-black text-blue-600 uppercase tracking-widest">Online Etiquette</h6>
-                                    <ul class="text-[11px] text-slate-500 netiquette-list">
-                                        <li>Address peers by name.</li>
-                                        <li>Acknowledge complexity; avoid binary "good/bad" judgments of AI.</li>
-                                        <li>Maintain a formal, professional tone for a Master's level audience.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <button class="w-full bg-[#006fbf] text-white py-3 rounded-lg font-black text-[11px] uppercase tracking-[0.2em] hover:bg-blue-700 transition-colors shadow-lg">
-                                Start New Thread
-                            </button>
+                    <div class="d2l-box">
+                        <div class="d2l-box-header">Discussion Forum (250 Words)</div>
+                        <div class="p-6 text-xs text-slate-600">
+                            <p class="mb-4 italic">Reflect on how this tool impacts your specific teaching discipline.</p>
+                            <ul class="netiquette-list">
+                                <li>Be professional and respectful.</li>
+                                <li>Cite specific examples from your course.</li>
+                            </ul>
+                            <button class="mt-4 w-full bg-[#006fbf] text-white py-2 rounded font-black uppercase">Post New Thread</button>
                         </div>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
-        window.onload = renderModules;
+        document.getElementById('module-list').innerHTML = modulesData.map(m => `
+            <div onclick="selectModule(${m.id})" class="module-item p-4 cursor-pointer hover:bg-slate-50 text-[11px] font-bold uppercase">
+                ${m.week}: ${m.title}
+            </div>`).join('');
+        
+        goHome();
     </script>
 </body>
 </html>
