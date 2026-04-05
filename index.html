@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristobal Farfan | Gemini Faculty Hub</title>
+    <title>Cristobal Farfan | AI101 Faculty Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
@@ -21,57 +21,20 @@
             color: var(--d2l-text); 
         }
         
-        .d2l-navbar {
-            background-color: #ffffff;
-            border-bottom: 1px solid var(--d2l-border);
-        }
-
-        .d2l-minibar {
-            background-color: #202122;
-            color: #ffffff;
-            height: 40px;
-        }
-
         .d2l-card {
             background: #ffffff;
             border: 1px solid var(--d2l-border);
             border-radius: 8px;
         }
 
-        .custom-scroll::-webkit-scrollbar { width: 6px; }
-        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #bdc3c7; border-radius: 10px; }
-
         .active-module {
             border-left: 4px solid var(--d2l-primary);
             background-color: #f9fbff;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .animate-fade { animation: fadeIn 0.3s ease-in; }
-
-        .status-pulse {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: #00a0e3;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0 { transform: scale(0.9); opacity: 0.4; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.9); opacity: 0.4; }
-        }
-
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             background: #000;
@@ -80,281 +43,220 @@
 
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .direct-link-btn {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        .direct-link-btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-1px);
+        }
+
+        .syllabus-accent {
+            border-left: 4px solid var(--d2l-primary);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- D2L Minibar Simulation -->
-    <div class="d2l-minibar flex items-center px-6 justify-between text-xs font-bold">
+    <!-- D2L Minibar -->
+    <div class="bg-[#202122] text-white py-2 px-6 flex justify-between items-center text-[11px] font-bold">
         <div class="flex items-center gap-4">
-            <span class="opacity-70">My Home</span>
+            <span class="opacity-70 uppercase tracking-wider">University of Dallas</span>
             <span class="w-[1px] h-3 bg-white/20"></span>
-            <span>AI101: ARTIFICIAL INTELLIGENCE</span>
+            <span>AI101: ARTIFICIAL INTELLIGENCE AND DIGITAL SKILLS</span>
         </div>
-        <div class="flex items-center gap-4">
-            <span class="hidden sm:inline">Cristobal Farfan</span>
-            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-[10px]">CF</div>
+        <div class="flex items-center gap-3">
+            <span>Cristobal Farfan</span>
+            <div class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-[9px]">CF</div>
         </div>
     </div>
 
     <!-- Main Navigation Bar -->
-    <nav class="d2l-navbar shadow-sm px-6 py-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <h1 class="text-xl font-bold tracking-tight text-[#006fbf]">Cristobal Farfan : Final Project</h1>
-            </div>
-            
-            <div class="flex items-center gap-8 text-sm font-bold text-slate-600 uppercase tracking-wide">
-                <span class="text-[#006fbf] border-b-2 border-[#006fbf] pb-1">Course Content</span>
+    <nav class="bg-white border-b border-slate-200 px-6 py-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-black text-[#006fbf] tracking-tight">GEMINI FACULTY HUB</h1>
+            <div class="hidden md:flex gap-6 text-xs font-bold text-slate-500 uppercase">
+                <span class="text-[#006fbf] border-b-2 border-[#006fbf] pb-1">Course Home</span>
+                <span class="hover:text-[#006fbf] cursor-pointer">Content</span>
                 <span class="hover:text-[#006fbf] cursor-pointer">Assignments</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Discussions</span>
-                <span class="hover:text-[#006fbf] cursor-pointer">Grades</span>
+                <span class="hover:text-[#006fbf] cursor-pointer">Classlist</span>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Sidebar Navigation -->
+        <!-- Sidebar: Table of Contents -->
         <div class="lg:col-span-4 space-y-4">
             <div class="d2l-card p-5">
-                <h3 class="text-sm font-bold text-slate-900 border-b pb-3 mb-4">Table of Contents</h3>
-                <div id="module-list" class="space-y-1 max-h-[600px] overflow-y-auto custom-scroll pr-1">
-                    <!-- Modules injected here -->
+                <h3 class="text-xs font-black text-slate-400 border-b pb-3 mb-4 uppercase tracking-widest">Table of Contents</h3>
+                <div id="module-list" class="space-y-1">
+                    <!-- Modules injected by JS -->
                 </div>
             </div>
 
-            <!-- Progress Card -->
-            <div class="d2l-card p-5">
-                <h4 class="text-xs font-bold text-slate-500 uppercase mb-3">Completion Status</h4>
-                <div class="flex justify-between text-sm font-bold mb-1">
-                    <span id="progress-text">0 of 13 topics</span>
-                    <span id="percent-text">0%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                    <div id="progress-bar" class="bg-[#006fbf] h-full transition-all duration-700" style="width: 0%"></div>
-                </div>
+            <!-- Instructor Info Sidebar -->
+            <div class="d2l-card p-5 bg-slate-50 border-dashed">
+                <h4 class="text-[10px] font-black text-slate-400 uppercase mb-3">Quick Contact</h4>
+                <p class="text-sm font-bold text-slate-800">Cristobal Farfan M.S</p>
+                <p class="text-xs text-[#006fbf] underline mb-3">cfarfan@udallas.edu</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed">Office Hours: Virtual / By appointment via Microsoft Teams.</p>
             </div>
         </div>
 
-        <!-- Content Area -->
-        <div class="lg:col-span-8 d2l-card overflow-hidden min-h-[700px] flex flex-col" id="module-detail">
-            <!-- Initial State / Syllabus Header -->
-            <div class="p-10 space-y-8 animate-fade">
-                <div class="text-center border-b pb-8">
-                    <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">AI101: ARTIFICIAL INTELLIGENCE AND DIGITAL SKILLS FOR EDUCATORS</h2>
-                    <p class="text-lg font-bold text-[#006fbf] mt-1">SPRING 2028 | COURSE SYLLABUS</p>
+        <!-- Main Content Area: Course Homepage/Details -->
+        <div class="lg:col-span-8 d2l-card min-h-[800px] flex flex-col" id="module-detail">
+            <!-- Initial "Course Home" View -->
+            <div class="p-10 space-y-10">
+                <div class="text-center space-y-4">
+                    <h2 class="text-3xl font-black text-slate-900 leading-tight uppercase">
+                        AI101: Artificial Intelligence and Digital Skills for Educators
+                    </h2>
+                    <p class="text-[#006fbf] font-bold tracking-widest uppercase text-sm">Spring 2028 | Faculty Professional Development</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-lg border border-slate-200">
-                    <div class="space-y-3">
-                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Instructor Information</h3>
-                        <div class="text-sm">
-                            <p class="font-bold text-slate-800">Instructor: <span class="font-normal">Cristobal Farfan M.S</span></p>
-                            <p class="font-bold text-slate-800">Office Hours: <span class="font-normal">Virtual / By appointment</span></p>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-black text-slate-800 uppercase border-b pb-2">Course Overview</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Welcome to the Gemini Faculty Fundamentals hub. This 13-week learning path is designed to transition instructional faculty from AI curiosity to classroom mastery. 
+                        </p>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Each module includes a focused video training provided by Google, a discussion prompt for reflection, and a practical activity to implement in your own curriculum.
+                        </p>
                     </div>
-                    <div class="space-y-3 border-t md:border-t-0 md:border-l border-slate-200 md:pl-6 pt-3 md:pt-0">
-                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Contact Details</h3>
-                        <div class="text-sm">
-                            <p class="font-bold text-slate-800">Email: <span class="font-normal text-[#006fbf]">cfarfan@udallas.edu</span></p>
-                            <p class="font-bold text-slate-800">Response Time: <span class="font-normal text-[#006fbf]">email- Within 24 hours on weekdays</span></p>
-                        </div>
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-black text-slate-800 uppercase border-b pb-2">Getting Started</h3>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#006fbf] font-bold">1.</span> Select a week from the Table of Contents.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#006fbf] font-bold">2.</span> Watch the integrated training video.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#006fbf] font-bold">3.</span> Access direct YouTube links if viewing issues occur.
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="flex flex-col items-center justify-center text-slate-500 py-12 text-center border-t border-dashed">
-                    <div class="w-16 h-16 mb-4 opacity-20">
-                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                    </div>
-                    <h2 class="text-lg font-bold text-slate-700 uppercase">Welcome to the Final Project Hub</h2>
-                    <p class="max-w-md text-sm mt-2 leading-relaxed">Select a module from the Table of Contents to begin the 13-week training sequence.</p>
+                <div class="border-t border-slate-100 pt-10 flex flex-col items-center text-slate-400">
+                    <svg class="w-12 h-12 mb-4 opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <p class="text-xs font-bold uppercase tracking-tighter">Please select a module to view weekly content</p>
                 </div>
             </div>
         </div>
-
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-10 mt-12">
-        <div class="max-w-7xl mx-auto px-6 text-center space-y-4">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">© 2028 Cristobal Farfan | University of Dallas</p>
-            <div class="flex justify-center gap-6 text-[10px] text-slate-500 font-medium">
-                <span>Privacy Policy</span>
-                <span>Terms of Use</span>
-                <span>Contact Support</span>
-            </div>
+    <footer class="bg-white border-t border-slate-200 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2028 Cristobal Farfan | University of Dallas | Final Project AI101</p>
         </div>
     </footer>
 
     <script>
-        // Using EMBED links instead of watch links to avoid 404/Refusal errors in frames
         const modulesData = [
-            { id: 1, week: 1, title: 'AI Foundations & Literacy', videoId: 'XshF3a4sJk0', discussion: 'How does your current understanding of LLMs differ from a standard search engine?', activity: 'Submit your AI Literacy Self-Assessment results.' },
-            { id: 2, week: 2, title: 'Meeting to Action Mastery', videoId: '0-j-A61p104', discussion: 'Identify a recurring meeting in your department that would benefit most from AI transcription.', activity: 'Upload a sample Action Table generated from a mock transcript.' },
-            { id: 3, week: 3, title: 'Instructional Guardrails', videoId: 'k-D5Tf-a2eI', discussion: 'What are the ethical risks of allowing AI to handle student feedback without faculty oversight?', activity: 'Design a "Feedback Loop" prompt for your most difficult assignment.' },
-            { id: 4, week: 4, title: 'AI-Driven Research Scans', videoId: 'mZunh6q92o4', discussion: 'Compare Gemini Deep Research results with a traditional library database search.', activity: 'Upload a 1-page summary of current pedagogical trends found via AI.' },
-            { id: 5, week: 5, title: 'NotebookLM Audio Briefs', videoId: 'E_PAnzJclb0', discussion: 'In what scenarios is an audio summary more effective for faculty than a written brief?', activity: 'Submit a link or screenshot of a NotebookLM Audio Overview you created.' },
-            { id: 6, week: 6, title: 'The Socratic AI Tutor', videoId: 'fXvX0k-q8kM', discussion: 'How can we ensure AI tutors encourage "productive struggle" rather than giving answers?', activity: 'Upload the system instructions for your custom Socratic Tutor.' },
-            { id: 7, week: 7, title: 'Data Analysis for Engagement', videoId: 'R_70O6G4ZkI', discussion: 'Which student engagement metrics are currently the hardest for you to track manually?', activity: 'Submit an anonymized data visualization report.' },
-            { id: 8, week: 8, title: 'Advanced Data Viz', videoId: 'V8lHPrR4Vmk', discussion: 'Discuss the importance of "Data Storytelling" in departmental presentations.', activity: 'Upload an infographic detailing student performance trends.' },
-            { id: 9, week: 9, title: 'Metaphorical Visualization', videoId: '6P6M0k6eX2E', discussion: 'How do visual metaphors help bridge the gap for students learning abstract concepts?', activity: 'Create and upload an AI-generated visual aid for a complex theory.' },
-            { id: 10, week: 10, title: 'Ethical Seminar Sparks', videoId: 'vV7k-L8p4Ww', discussion: 'Draft a debate prompt regarding AI ethics that you would use in a live class.', activity: 'Upload a set of 5 "Seminar Spark" prompts.' },
-            { id: 11, week: 11, title: 'Automated Rubric Checks', videoId: 'Yp9N6zRzE4o', discussion: 'Should students be allowed to see AI-generated rubric pre-checks before submission?', activity: 'Submit a custom rubric formatted for AI assessment.' },
-            { id: 12, week: 12, title: 'Local Case Study Design', videoId: 'o0L6jP4v2O0', discussion: 'How can localizing case studies to Irving/Dallas improve student buy-in?', activity: 'Upload a 500-word localized case study generated with AI.' },
-            { id: 13, week: 13, title: 'Final Synthesis & Debrief', videoId: 'v_F8M8k9n7I', discussion: 'Reflect on the past 13 weeks. What is the single biggest shift in your teaching philosophy?', activity: 'Submit your "Final AI Implementation Plan" for the upcoming semester.' }
+            { id: 1, week: 1, title: 'AI Foundations & Literacy', videoId: 'XshF3a4sJk0', discussion: 'How does your understanding of LLMs differ from a search engine?', activity: 'Submit AI Literacy Self-Assessment.' },
+            { id: 2, week: 2, title: 'Meeting to Action Mastery', videoId: '0-j-A61p104', discussion: 'Identify a meeting that would benefit from AI transcription.', activity: 'Upload an Action Table from a mock transcript.' },
+            { id: 3, week: 3, title: 'Instructional Guardrails', videoId: 'k-D5Tf-a2eI', discussion: 'What are the ethical risks of AI feedback without oversight?', activity: 'Design a "Feedback Loop" prompt.' },
+            { id: 4, week: 4, title: 'AI-Driven Research Scans', videoId: 'mZunh6q92o4', discussion: 'Compare Gemini Deep Research with library databases.', activity: 'Upload a 1-page pedagogical trends summary.' },
+            { id: 5, week: 5, title: 'NotebookLM Audio Briefs', videoId: 'E_PAnzJclb0', discussion: 'When is an audio summary more effective than a written brief?', activity: 'Submit a NotebookLM Audio link/screenshot.' },
+            { id: 6, week: 6, title: 'The Socratic AI Tutor', videoId: 'fXvX0k-q8kM', discussion: 'How can AI encourage "productive struggle"?', activity: 'Upload custom Socratic Tutor instructions.' },
+            { id: 7, week: 7, title: 'Data Analysis for Engagement', videoId: 'R_70O6G4ZkI', discussion: 'Which engagement metrics are hardest to track?', activity: 'Submit a data visualization report.' },
+            { id: 8, week: 8, title: 'Advanced Data Viz', videoId: 'V8lHPrR4Vmk', discussion: 'Discuss "Data Storytelling" in departmental work.', activity: 'Upload a performance trend infographic.' },
+            { id: 9, week: 9, title: 'Metaphorical Visualization', videoId: '6P6M0k6eX2E', discussion: 'How do visual metaphors help bridge abstract concepts?', activity: 'Create an AI visual aid for a complex theory.' },
+            { id: 10, week: 10, title: 'Ethical Seminar Sparks', videoId: 'vV7k-L8p4Ww', discussion: 'Draft a debate prompt regarding AI ethics.', activity: 'Upload 5 "Seminar Spark" prompts.' },
+            { id: 11, week: 11, title: 'Automated Rubric Checks', videoId: 'Yp9N6zRzE4o', discussion: 'Should students see AI rubric checks before submission?', activity: 'Submit a custom AI assessment rubric.' },
+            { id: 12, week: 12, title: 'Local Case Study Design', videoId: 'o0L6jP4v2O0', discussion: 'How does localization improve student buy-in?', activity: 'Upload a localized case study.' },
+            { id: 13, week: 13, title: 'Final Synthesis & Debrief', videoId: 'v_F8M8k9n7I', discussion: 'What is the biggest shift in your teaching philosophy?', activity: 'Submit Final AI Implementation Plan.' }
         ];
-
-        let state = {
-            module: null,
-            completed: new Set(),
-            comments: {},
-            uploads: {}
-        };
-
-        function init() {
-            renderModules();
-            updateProgress();
-        }
 
         function renderModules() {
             const list = document.getElementById('module-list');
-            list.innerHTML = modulesData.map(m => {
-                const isActive = state.module === m.id;
-                const isDone = state.completed.has(m.id);
-                return `
-                    <div onclick="selectModule(${m.id})" 
-                        class="p-3.5 rounded-md cursor-pointer transition-all flex items-center gap-3 border border-transparent hover:bg-slate-50 group ${isActive ? 'active-module shadow-sm' : ''}">
-                        <div class="flex-shrink-0 w-5 h-5 rounded border ${isDone ? 'bg-[#006fbf] border-[#006fbf]' : 'border-slate-300 bg-white'} flex items-center justify-center transition-colors">
-                            ${isDone ? '<svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>' : ''}
-                        </div>
-                        <span class="text-sm font-medium ${isActive ? 'text-[#006fbf]' : 'text-slate-600'}">Week ${m.week}: ${m.title}</span>
-                    </div>
-                `;
-            }).join('');
+            list.innerHTML = modulesData.map(m => `
+                <div onclick="selectModule(${m.id})" class="module-item p-3 rounded cursor-pointer hover:bg-slate-50 transition-all border-l-4 border-transparent flex items-center gap-3">
+                    <div class="w-6 h-6 bg-slate-100 rounded text-[10px] flex items-center justify-center font-black text-slate-400">${m.week}</div>
+                    <span class="text-xs font-bold text-slate-600">${m.title}</span>
+                </div>
+            `).join('');
         }
 
         function selectModule(id) {
-            state.module = id;
-            renderModules();
-            renderDetail();
-        }
+            // Update UI selection
+            document.querySelectorAll('.module-item').forEach((el, idx) => {
+                el.classList.toggle('active-module', idx + 1 === id);
+            });
 
-        function renderDetail() {
+            const m = modulesData.find(mod => mod.id === id);
             const container = document.getElementById('module-detail');
-            const m = modulesData.find(mod => mod.id === state.module);
-            
-            if (!m) return;
-
-            const isDone = state.completed.has(m.id);
-            const currentComment = state.comments[m.id] || "";
-            const currentFile = state.uploads[m.id] || null;
+            const directUrl = `https://www.youtube.com/watch?v=${m.videoId}`;
             const embedUrl = `https://www.youtube.com/embed/${m.videoId}`;
-            const watchUrl = `https://www.youtube.com/watch?v=${m.videoId}`;
 
             container.innerHTML = `
                 <div class="animate-fade flex flex-col h-full">
-                    <div class="p-8 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#fcfdfe]">
+                    <!-- Header -->
+                    <div class="p-8 border-b border-slate-100 bg-[#fcfdfe] flex justify-between items-center">
                         <div>
-                            <h2 class="text-2xl font-bold text-slate-900 leading-tight">Week ${m.week}: ${m.title}</h2>
-                            <p class="text-xs font-bold text-[#006fbf] uppercase tracking-wider mt-1">Module Content & Submission</p>
+                            <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Week ${m.week}: ${m.title}</h2>
+                            <p class="text-[#006fbf] font-bold text-xs uppercase tracking-widest mt-1">Module Content & Video Resource</p>
                         </div>
-                        <div class="flex flex-col items-end gap-2">
-                             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">* All video content provided by Google</span>
-                        </div>
+                        <a href="${directUrl}" target="_blank" class="direct-link-btn">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            Open in YouTube
+                        </a>
                     </div>
 
-                    <div class="p-8 space-y-10 overflow-y-auto custom-scroll flex-grow">
-                        <!-- Video Section -->
+                    <!-- Content -->
+                    <div class="p-8 space-y-10 overflow-y-auto">
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <h3 class="text-sm font-bold uppercase tracking-wide text-slate-800">1. Watch Training Video</h3>
-                                <a href="${watchUrl}" target="_blank" class="text-[#006fbf] text-xs font-bold hover:underline flex items-center gap-1">
-                                    Open in YouTube
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </a>
-                            </div>
-                            <div class="video-container shadow-lg border border-slate-200">
-                                <iframe 
-                                    src="${embedUrl}" 
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    allowfullscreen>
-                                </iframe>
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">1. Video Presentation</h3>
+                            <div class="video-container shadow-xl border-4 border-white ring-1 ring-slate-200">
+                                <iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe>
                             </div>
                         </div>
 
-                        <!-- Discussion Section -->
-                        <div class="space-y-4 pt-6 border-t border-slate-100">
-                            <h3 class="text-sm font-bold uppercase tracking-wide text-slate-800">2. Course Discussion Prompt</h3>
-                            <div class="bg-blue-50 border-l-4 border-[#006fbf] p-5">
-                                <p class="text-sm font-medium text-slate-700 italic">"${m.discussion}"</p>
-                            </div>
-                            <div class="space-y-2 mt-4">
-                                <div class="flex justify-between items-center px-1">
-                                    <label class="text-xs font-bold text-slate-500 uppercase">Your Reflection</label>
-                                    <div class="flex items-center text-[10px] text-emerald-600 font-bold uppercase">
-                                        <span class="status-pulse"></span> Autosaving
-                                    </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-slate-50">
+                            <div class="space-y-3">
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">2. Discussion Prompt</h3>
+                                <div class="syllabus-accent p-4 bg-blue-50 text-sm font-bold text-slate-700 italic">
+                                    "${m.discussion}"
                                 </div>
-                                <textarea 
-                                    oninput="saveComment(${m.id}, this.value)"
-                                    placeholder="Enter your response here..." 
-                                    class="w-full h-36 border border-slate-300 rounded p-4 text-sm focus:border-[#006fbf] focus:ring-1 focus:ring-[#006fbf] outline-none transition-all resize-none shadow-inner"
-                                >${currentComment}</textarea>
                             </div>
-                        </div>
-
-                        <!-- Submission Section -->
-                        <div class="pt-6 border-t border-slate-100">
-                            <h3 class="text-sm font-bold uppercase tracking-wide text-slate-800 mb-4">3. Final Assignment Submission</h3>
-                            <div class="text-xs text-slate-500 mb-4 flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                Requirement: ${m.activity}
-                            </div>
-                            <div onclick="document.getElementById('fileInput').click()" 
-                                class="border-2 border-dashed border-slate-300 rounded-lg py-12 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 hover:border-[#006fbf] transition-all bg-white">
-                                <input type="file" id="fileInput" class="hidden" onchange="handleUpload(${m.id}, this)">
-                                ${currentFile ? `
-                                    <div class="flex flex-col items-center text-[#006fbf]">
-                                        <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        <p class="font-bold text-sm">${currentFile}</p>
-                                    </div>
-                                ` : `
-                                    <svg class="w-10 h-10 text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                    <p class="text-slate-500 font-bold text-sm">Upload your file</p>
-                                `}
+                            <div class="space-y-3">
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">3. Weekly Activity</h3>
+                                <div class="p-4 bg-slate-50 border border-slate-200 rounded text-sm text-slate-600 font-medium">
+                                    ${m.activity}
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-6 bg-slate-50 border-t border-slate-200 flex justify-end gap-3">
-                        <button onclick="toggleDone(${m.id})" 
-                            class="px-8 py-3 rounded font-bold text-sm transition-all shadow-sm ${isDone ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-[#006fbf] text-white hover:bg-[#005fa3]'}">
-                            ${isDone ? 'Mark as Incomplete' : 'Set as Complete'}
+                    <!-- Footer Action -->
+                    <div class="p-6 bg-slate-50 border-t border-slate-200 flex justify-end">
+                        <button class="px-6 py-2.5 bg-[#006fbf] text-white font-bold text-xs rounded uppercase tracking-widest hover:bg-[#005fa3] transition-colors">
+                            Submit Completion
                         </button>
                     </div>
                 </div>
             `;
         }
 
-        function saveComment(moduleId, text) { state.comments[moduleId] = text; }
-        function handleUpload(moduleId, input) { if (input.files && input.files[0]) { state.uploads[moduleId] = input.files[0].name; renderDetail(); } }
-        function toggleDone(id) { if (state.completed.has(id)) state.completed.delete(id); else state.completed.add(id); updateProgress(); renderModules(); renderDetail(); }
-        function updateProgress() {
-            const count = state.completed.size;
-            const percent = Math.round((count / 13) * 100);
-            document.getElementById('progress-text').textContent = `${count} of 13 topics`;
-            document.getElementById('percent-text').textContent = `${percent}%`;
-            document.getElementById('progress-bar').style.width = percent + '%';
-        }
-
-        window.onload = init;
+        window.onload = renderModules;
     </script>
 </body>
 </html>
