@@ -57,7 +57,6 @@
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Custom Scrollbar for Sidebar */
         #module-list::-webkit-scrollbar { width: 4px; }
         #module-list::-webkit-scrollbar-track { background: #f1f1f1; }
         #module-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
@@ -73,7 +72,7 @@
             <span class="text-slate-400">Brightspace Portal</span>
         </div>
         <div class="flex items-center gap-4">
-            <span class="text-[10px] lowercase opacity-70">cfarfan@university.edu</span>
+            <span class="text-[10px] lowercase opacity-70">cfarfan@uai.edu</span>
             <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-[10px]">CF</div>
         </div>
     </div>
@@ -82,7 +81,7 @@
     <nav class="navbar">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="goHome()">
-                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-black">AI</div>
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-black">UA</div>
                 <h1 class="text-xl font-black text-slate-800 tracking-tighter">AI101: Gemini for Faculty</h1>
             </div>
             <div class="flex gap-8 text-[11px] font-black text-slate-500 uppercase tracking-wide">
@@ -152,7 +151,6 @@
                                 <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-black text-xl shadow-inner">CF</div>
                                 <div>
                                     <p class="font-black text-slate-900">Cristobal Farfan Maguina</p>
-                                    <p class="text-sm text-slate-500">Bilingual & ESL Specialist</p>
                                     <p class="text-[10px] text-blue-600 font-bold uppercase mt-1">Lead AI Facilitator</p>
                                 </div>
                             </div>
@@ -206,13 +204,11 @@
                         <a href="${exceedPath}" target="_blank" class="launch-btn">Launch Tutorial</a>
                     </div>
 
-                    <!-- GUIDANCE DEFINITION -->
                     <div class="bg-[#f8fbff] p-5 border-l-4 border-[#006fbf] rounded-r-lg">
                         <h4 class="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">Pedagogical Definition</h4>
                         <p class="text-sm text-slate-700 font-medium">${m.guide}</p>
                     </div>
 
-                    <!-- ASSIGNMENT UPLOAD -->
                     <div class="d2l-box shadow-sm">
                         <div class="d2l-box-header flex justify-between items-center">
                             <span>Practical Activity Folder</span>
@@ -229,7 +225,6 @@
                         </div>
                     </div>
 
-                    <!-- GRADUATE DISCUSSION -->
                     <div class="d2l-box shadow-sm">
                         <div class="d2l-box-header flex items-center gap-2">
                             <svg class="w-4 h-4 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg>
